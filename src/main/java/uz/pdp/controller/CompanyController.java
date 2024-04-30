@@ -1,16 +1,14 @@
-package uz.pdp.task1.controller;
-import com.sun.deploy.net.HttpResponse;
+package uz.pdp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.task1.entity.Company;
-import uz.pdp.task1.payload.ApiResponse;
-import uz.pdp.task1.payload.CompanyDto;
-import uz.pdp.task1.service.CompanyService;
+import uz.pdp.entity.Company;
+import uz.pdp.payload.ApiResponse;
+import uz.pdp.payload.CompanyDto;
+import uz.pdp.service.CompanyService;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +39,8 @@ public class CompanyController {
     }
 
     @PutMapping("/api/company/{id}")
-    public ResponseEntity<ApiResponse> editCompany(@Valid @RequestBody CompanyDto companyDto,@PathVariable Integer id){
-        ApiResponse apiResponse = companyService.editCompany(companyDto,id);
+    public ResponseEntity<ApiResponse> editCompany(@Valid @RequestBody CompanyDto companyDto, @PathVariable Integer id){
+        ApiResponse apiResponse = companyService.editCompany(companyDto, id);
         return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.ACCEPTED:HttpStatus.CONFLICT).body(apiResponse);
     }
 
@@ -53,14 +51,14 @@ public class CompanyController {
     }
 
 
-    // "status": 400, "error": "Bad Request" BÖLSA SHU YERGA TUSHADI
+    // "status": 400, OR "error": "Bad Request"
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){
 
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
+            String fieldName = ( (FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });

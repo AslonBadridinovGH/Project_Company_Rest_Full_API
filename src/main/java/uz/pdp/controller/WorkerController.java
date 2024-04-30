@@ -1,4 +1,4 @@
-package uz.pdp.task1.controller;
+package uz.pdp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,11 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.task1.entity.Worker;
-import uz.pdp.task1.payload.ApiResponse;
-import uz.pdp.task1.payload.WorkerDto;
-import uz.pdp.task1.service.DepartmentService;
-import uz.pdp.task1.service.WorkerService;
+import uz.pdp.entity.Worker;
+import uz.pdp.payload.ApiResponse;
+import uz.pdp.payload.WorkerDto;
+import uz.pdp.service.DepartmentService;
+import uz.pdp.service.WorkerService;
+
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class WorkerController {
     @PostMapping("/api/worker")
     public ResponseEntity<ApiResponse> addWorker(@Valid @RequestBody WorkerDto workerDto){
         ApiResponse apiResponse = workerService.addWorker(workerDto);
-        return ResponseEntity.status(apiResponse.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.CREATED:HttpStatus.CONFLICT).body(apiResponse);
     }
 
     @GetMapping("/api/worker")
@@ -45,7 +46,7 @@ public class WorkerController {
 
     @PutMapping("/api/worker/{id}")
     public ResponseEntity<ApiResponse> editWorker(@Valid @RequestBody WorkerDto workerDto, @PathVariable Integer id){
-        ApiResponse apiResponse = workerService.editWorker(workerDto,id);
+        ApiResponse apiResponse = workerService.editWorker(workerDto, id);
         return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.ACCEPTED:HttpStatus.CONFLICT).body(apiResponse);
     }
 
@@ -67,6 +68,5 @@ public class WorkerController {
         });
         return errors;
     }
-
 
 }

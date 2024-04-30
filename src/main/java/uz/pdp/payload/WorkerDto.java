@@ -1,14 +1,14 @@
-package uz.pdp.task1.payload;
+package uz.pdp.payload;
 import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
 public class WorkerDto {
 
-  @NotNull(message = "Worker nomi bösh bölmasin")
+  @NotNull(message = "worker name doesn't must be empty")
   private String  name;
 
-  @NotNull(message = "Telefon nomer bösh bölmasin")
+  @NotNull(message = "phone name doesn't must be empty")
   private String  phoneNumber;
 
   private Integer departmentId;

@@ -1,4 +1,4 @@
-package uz.pdp.task1.payload;
+package uz.pdp.payload;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class CompanyDto {
 
 
- @NotNull(message = "corpName bösh bölmasin")
+ @NotNull(message = "corp name does not must be empty")
  private String corpName;
 
  private String directorName;

@@ -1,4 +1,4 @@
-package uz.pdp.task1.entity;
+package uz.pdp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Entity
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
